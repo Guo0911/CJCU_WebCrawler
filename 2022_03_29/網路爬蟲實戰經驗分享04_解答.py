@@ -44,6 +44,7 @@ for i in range(len(find)//9):
           '課程名稱 : ', td[0].text, '\n' \
           '開課碼 : ' , td[1].text, '\n' \
           '學分 : ', td[2].text, '\n' \
+          '開課班級 : ', td[3].text, '\n' \
           '選必修 : ', td[4].text, '\n' \
           '日期 : ', date[0], '\n' \
           '時間 : ', date[1], '\n' \
