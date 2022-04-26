@@ -1,3 +1,6 @@
+#下載ChromeDriver並啟用
+#pip install selenium 先安裝Selenium
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 
