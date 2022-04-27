@@ -74,5 +74,7 @@ while True:
                 time.sleep(2) #每次按讚的間隔，不建議等待時間太短，可能會被伺服器偵測為機器人而封鎖
                 times += 1 #增加按下的次數
                 webdriver.ActionChains(chrome).move_to_element(likes[i]).click(likes[i]).perform() #按下按鈕
+                #ActionChains為一種非立即執行的方式，他會先將設定好的操作儲存，直到「perform()」才會執行
+                #「move_to_element(x)」會將滑鼠移到()內指定的元素x的位置；「click(x)」用於點擊元素x；「perform()」代表讓ActionChains執行動作
         else:
             chrome.refresh() #讓程式刷新頁面
