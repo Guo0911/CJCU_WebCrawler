@@ -71,6 +71,7 @@ while True:
         time.sleep(random.randint(2,4)) # 等待網站更新完成，如果更新未完成會導致找不到新的按鈕
         
         likes = chrome.find_elements_by_xpath('//div[contains(@class, "oajrlxb2 gs1a9yip g5ia77u1 mtkw9kbi tlpljxtp qensuy8j ppp5ayq2 goun2846 ccm00jje s44p3ltw mk2mc5f4 rt8b4zig n8ej3o3l agehan2d sk4xxmp2 rq0escxv nhd2j8a9 mg4g778l pfnyh3mw p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x tgvbjcpo hpfvmrgz i1ao9s8h esuyzwwr du4w35lb n00je7tq arfg74bv qs9ysxi8 k77z8yql pq6dq46d btwxx1t3 abiwlrkh p8dawk7l lzcic4wl pphx12oy b4ylihy8 rz4wbd8a b40mr0ww a8nywdso hmalg0qr q45zohi1 g0aa4cga pmk7jnqg gokke00a")]')
+        # 抓取要按讚的元素位置
         if len(likes) > times: # 偵測找到的按鈕是否比按過的按鈕多，如果比較少代表程式找到的按鈕數有問題或更新有問題
             for i in range(times,len(likes)): # 跳過按過的按鈕，直接從最後一次的下一個開始
                 time.sleep(random.randint(1,3)) # 每次按讚的間隔，不建議等待時間太短，可能會被伺服器偵測為機器人而封鎖
