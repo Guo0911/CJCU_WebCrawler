@@ -1,7 +1,7 @@
 # 使用「pip install selenium」先安裝Selenium
 # 使用「pip install webdriver_manager 」 安裝WebDriver_manager
 
-import msvcrt, time # 導入msvcrt實現隱藏輸入密碼；導入time用於暫停程式
+import msvcrt, time, random # 導入msvcrt實現隱藏輸入密碼；導入time用於暫停程式；導入random用於隨機暫停時長
 from selenium import webdriver # 導入WebDriver
 from selenium.webdriver.common.keys import Keys # 導入Keys用於使用ENTER登入
 from webdriver_manager.chrome import ChromeDriverManager # 導入ChromeDriverManager用於更新ChromeDriver版本
@@ -58,7 +58,7 @@ def login():
 
 
 chrome.get("https://www.facebook.com/login") # 讓Chrome進入facebook登入頁面
-time.sleep(3.0) # 讓程式停止3秒，用於等待網頁完全進入
+time.sleep(3) # 讓程式停止3秒，用於等待網頁完全進入
 
 login() # 執行登入的function
 
@@ -68,15 +68,16 @@ while True:
         chrome.execute_script("window.scrollBy(0, 2000)") # 下滑2000像素的距離
         # 「execute_script」執行JavaScript
         # 「window.scrollBy(x,y)」向右滑動x個像素，並向下滑動y個像素，若為負則往左x個像素、往上y個像素
-        time.sleep(3) # 等待網站更新完成，如果更新未完成會導致找不到新的按鈕
+        time.sleep(random.randint(2,4)) # 等待網站更新完成，如果更新未完成會導致找不到新的按鈕
         
-        likes = chrome.find_elements_by_xpath('//div[contains(@aria-label, "傳達心情")]')
+        likes = chrome.find_elements_by_xpath('//div[contains(@class, "oajrlxb2 gs1a9yip g5ia77u1 mtkw9kbi tlpljxtp qensuy8j ppp5ayq2 goun2846 ccm00jje s44p3ltw mk2mc5f4 rt8b4zig n8ej3o3l agehan2d sk4xxmp2 rq0escxv nhd2j8a9 mg4g778l pfnyh3mw p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x tgvbjcpo hpfvmrgz i1ao9s8h esuyzwwr du4w35lb n00je7tq arfg74bv qs9ysxi8 k77z8yql pq6dq46d btwxx1t3 abiwlrkh p8dawk7l lzcic4wl pphx12oy b4ylihy8 rz4wbd8a b40mr0ww a8nywdso hmalg0qr q45zohi1 g0aa4cga pmk7jnqg gokke00a")]')
         if len(likes) > times: # 偵測找到的按鈕是否比按過的按鈕多，如果比較少代表程式找到的按鈕數有問題或更新有問題
             for i in range(times,len(likes)): # 跳過按過的按鈕，直接從最後一次的下一個開始
-                time.sleep(2) # 每次按讚的間隔，不建議等待時間太短，可能會被伺服器偵測為機器人而封鎖
+                time.sleep(random.randint(1,3)) # 每次按讚的間隔，不建議等待時間太短，可能會被伺服器偵測為機器人而封鎖
                 times += 1 # 增加按下的次數
                 webdriver.ActionChains(chrome).move_to_element(likes[i]).click(likes[i]).perform() #按下按鈕
                 # ActionChains為一種非立即執行的方式，他會先將設定好的操作儲存，直到「perform()」才會執行
                 # 「move_to_element(x)」會將滑鼠移到()內指定的元素x的位置；「click(x)」用於點擊元素x；「perform()」代表讓ActionChains執行動作
         else:
             chrome.refresh() # 讓程式刷新頁面
+            times = 0 # 因網頁刷新，因此要重製紀錄
