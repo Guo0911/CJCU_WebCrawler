@@ -52,7 +52,7 @@ def login():
         hint = chrome.find_element_by_class_name("_9ay7") # 抓取訊息提示框
         if "未與帳號連結" in hint.text or "密碼錯誤" in hint.text: # 如果帳號錯誤或密碼錯誤在提示框內
             login() # 再次執行登入
-    except: # 程式出現錯誤時值型except內的程式碼，若except內出現錯誤則程式會直接中斷
+    except: # 程式出現錯誤時執行except內的程式碼，若except內出現錯誤則程式會直接中斷
         print("登入成功") # 因為當程式找不到訊息提示框，代表已成功登入
         chrome.get("https://www.facebook.com") # 跳至facebook首頁，新帳號才需要使用此行，因新帳號登入後常出現無任何貼文的狀況
 
